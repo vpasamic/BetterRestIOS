@@ -8,11 +8,6 @@
 import SwiftUI
 import CoreML
 
-enum BeverageType {
-    case coffee
-    case tea
-}
-
 struct ContentView: View {
     static var defaultWakeTime: Date {
         var components = DateComponents()
@@ -22,8 +17,8 @@ struct ContentView: View {
     }
 
     @State private var sleepAmount = 8.0
-    @State private var beverageType = BeverageType.coffee
-    @State private var beverageAmount = 1
+    @State private var coffeeAmount = 1
+    @State private var teaAmount = 1
     @State private var wakeUp = defaultWakeTime
 
     @State private var alertTitle = "Welcome!"
@@ -44,24 +39,26 @@ struct ContentView: View {
                     Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.25)
                 }
 
-                Section(header: Text("Beverage Type").font(.headline)) {
-                    Picker("Type", selection: $beverageType) {
-                        Text("Coffee").tag(BeverageType.coffee)
-                        Text("Tea").tag(BeverageType.tea)
-                    }
-                    .pickerStyle(SegmentedPickerStyle())
-                }
-
-                Section(header: Text("Daily beverage intake").font(.headline)) {
-                    Picker("Number of cups", selection: $beverageAmount) {
+                Section(header: Text("Coffee Intake").font(.headline)) {
+                    Picker("Coffee cups", selection: $coffeeAmount) {
                         ForEach(beverageAmounts, id: \.self) { amount in
-                            Text("\(amount)")
+                            Text("\(amount) cup\(amount > 1 ? "s" : "")")
                         }
                     }
                     .pickerStyle(WheelPickerStyle())
                     .frame(height: 100)
-
                 }
+                
+                Section(header: Text("Tea Intake").font(.headline)) {
+                    Picker("Tea cups", selection: $teaAmount) {
+                        ForEach(beverageAmounts, id: \.self) { amount in
+                            Text("\(amount) cup\(amount > 1 ? "s" : "")")
+                        }
+                    }
+                    .pickerStyle(WheelPickerStyle())
+                    .frame(height: 100)
+                }
+
                 Section(header: Text("Recommended Bedtime").font(.headline)) {
                     Text(calculateBedtime())
                         .font(.largeTitle)
@@ -85,21 +82,19 @@ struct ContentView: View {
         let hour = (components.hour ?? 0) * 60 * 60
         let minute = (components.minute ?? 0) * 60
 
-        let beverageMultiplier: Double
-        switch beverageType {
-        case .coffee:
-            beverageMultiplier = 1.0
-        case .tea:
-            beverageMultiplier = 1.0 / 3.0
-        }
+        let coffeeMultiplier = 1.0
+        let teaMultiplier = 1.0 / 3.0
 
-        let adjustedBeverageAmount = Double(beverageAmount) * beverageMultiplier
+        let adjustedCoffeeAmount = Double(coffeeAmount) * coffeeMultiplier
+        let adjustedTeaAmount = Double(teaAmount) * teaMultiplier
+
+        let totalBeverageAmount = adjustedCoffeeAmount + adjustedTeaAmount
 
         do {
             let config = MLModelConfiguration()
             let model = try SleepCalculator(configuration: config)
 
-            let prediction = try model.prediction(wake: Double(hour + minute), estimatedSleep: sleepAmount, coffee: adjustedBeverageAmount)
+            let prediction = try model.prediction(wake: Double(hour + minute), estimatedSleep: sleepAmount, coffee: totalBeverageAmount)
 
             let sleepTime = wakeUp - prediction.actualSleep
 
