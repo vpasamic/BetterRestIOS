@@ -14,6 +14,7 @@
 		F16DABFA2A47A7E90087F592 /* BetterRestIOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16DABF92A47A7E90087F592 /* BetterRestIOSTests.swift */; };
 		F16DAC042A47A7E90087F592 /* BetterRestIOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16DAC032A47A7E90087F592 /* BetterRestIOSUITests.swift */; };
 		F16DAC062A47A7E90087F592 /* BetterRestIOSUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F16DAC052A47A7E90087F592 /* BetterRestIOSUITestsLaunchTests.swift */; };
+		F16DAC132A47A8220087F592 /* SleepCalculator.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = F16DAC122A47A8220087F592 /* SleepCalculator.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		F16DABFF2A47A7E90087F592 /* BetterRestIOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BetterRestIOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F16DAC032A47A7E90087F592 /* BetterRestIOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterRestIOSUITests.swift; sourceTree = "<group>"; };
 		F16DAC052A47A7E90087F592 /* BetterRestIOSUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterRestIOSUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F16DAC122A47A8220087F592 /* SleepCalculator.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = SleepCalculator.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +98,7 @@
 			children = (
 				F16DABE82A47A7E70087F592 /* BetterRestIOSApp.swift */,
 				F16DABEA2A47A7E70087F592 /* ContentView.swift */,
+				F16DAC122A47A8220087F592 /* SleepCalculator.mlmodel */,
 				F16DABEC2A47A7E90087F592 /* Assets.xcassets */,
 				F16DABEE2A47A7E90087F592 /* Preview Content */,
 			);
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F16DABEB2A47A7E70087F592 /* ContentView.swift in Sources */,
+				F16DAC132A47A8220087F592 /* SleepCalculator.mlmodel in Sources */,
 				F16DABE92A47A7E70087F592 /* BetterRestIOSApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
